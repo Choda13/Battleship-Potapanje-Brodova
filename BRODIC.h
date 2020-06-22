@@ -2,6 +2,7 @@
 #ifndef BRODIC_H_INCLUDED
 #define BRODIC_H_INCLUDED
 
+#include <thread>
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -60,8 +61,8 @@
 #define IME2_Y 135
 
 
-#define KANTA_X
-#define KANTA_Y
+//#define KANTA_X
+//#define KANTA_Y
 
 #define SHUFFLE_X 450
 #define SHUFFLE_Y 128
@@ -109,6 +110,7 @@
 
 #define ERROR_TEXT_COLOR 4
 
+using namespace std;
 
 struct POLJE
 {
@@ -192,7 +194,7 @@ void ispisiIzbor(int dugme);
 void exitAnim();
 void ispisiProsli(int sta);
 int meni();
-void settings();
+void settingsMeni();
 void krstarica(int x, int y);
 void nosacAviona(int x, int y);
 void podmornica(int x, int y);
@@ -231,8 +233,8 @@ wchar_t* ucitajFajl(const char imeFajla[]);
 ----------OSTALE-FUNKCIJE------------
 *************************************/
 
-int uX(int broj); //daje x kordinate u tabeli u odnosu na parametar broj
-int uY(int broj); //daje y kordinate u tabeli u odnosu na parametar broj
+int uX(int broj); //daje x kordinate u tabeli u odnosu na parametar broj, parametar broj bi bila neka kolona (kolona 5 = neka kordinata x)
+int uY(int broj); //daje y kordinate u tabeli u odnosu na parametar broj -||- umesto kolone vrsta
 void UnosImena(char* ime, int igrac); //Ispisuje se meni za unos imena igraca odredjenog parametrom igrac i smesta ime u string ime
 BOOL PostavkaBrodova(POLJE tabla[][DIM], const char* ime); //Prikazuje se interaktivno okruzenje za unos tj. postavku brodova
 void update(POLJE mat[][DIM], COORD niz[], int n);
@@ -240,6 +242,8 @@ void obrisiOkolo(POLJE mat[][DIM], int v, int k);
 void postaviRandom(POLJE mat[][DIM]);
 int cinIgre(POLJE tablaPrvog[][DIM], POLJE tablaDrugog[][DIM], const char* imePrvog, const char* imeDrugog);
 void exitAnim();//animacija za izlazak iz aplikacije
+void ucitajFrejmove();//Ucitava sve frejmove gifa, i smesta ih u memoriju
+
 /*************************
 --------------------------
 **************************/

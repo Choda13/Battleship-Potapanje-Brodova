@@ -1,12 +1,10 @@
 #include "BRODIC.h"
 #pragma warning(disable:4996)
-//opcije za boju teksta 0-totalno crno ili 13 ljubicasto
-//opcija za boju selekta zelena 10
-//int x = POCETAK_TABELE_X + 23 * (brk + 1);
-//int y = POCETAK_TABELE_Y + 1 + 10 * brv;
 
 int main()
 {
+	thread th1 (ucitajFrejmove);
+	th1.detach();
 	while (1)
 	{
 		POLJE PrviTabla[DIM][DIM];
@@ -42,7 +40,7 @@ int main()
 		if (opcija == 2)
 			animeGif();
 		if (opcija == 3)
-			settings();
+			settingsMeni();
 		if (opcija == 4)
 		{
 			exitAnim();

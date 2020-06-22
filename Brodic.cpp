@@ -2,6 +2,22 @@
 #include "BRODIC.h"
 
 int delay = 20; //animation delay between frames
+wchar_t* frejmovi[300];
+
+void ucitajFrejmove()
+{
+	char frame[100];
+	char num[100];
+
+	for (int i = 0; i < 300; i++)
+	{
+		strcpy(frame, "GIF\\frame");
+		itoa(i, num, 10);
+		strcat(frame, num);
+		strcat(frame, ".txt");
+		frejmovi[i] = ucitajFajl(frame);
+	}
+}
 
 void gotoxy(int x, int y)
 {
@@ -932,37 +948,6 @@ BOOL PostavkaBrodova(POLJE mat[][DIM], const char* ime)
 				shuffle(SHUFFLE_X, SHUFFLE_Y);
 			}
 
-			/*	if (c == 't' || c == 'T')   //TEST DA LI JE DOBAR UPIS U TABELU
-				{
-
-					FILE* f;
-					f = fopen("lele.txt", "w");
-					for (int i = 0; i < 10; i++)
-					{
-						for (int j = 0; j < 10; j++)
-							fprintf(f, "%d%d  ", mat[i][j].vrednost, mat[i][j].vidljivost);
-						fprintf(f, "\n");
-					}
-					fclose(f);
-					while (1)
-					{
-						if (_kbhit)
-							break;
-					}
-				}*/
-
-				/*
-				if (c == 'q' || c == 'Q')
-				{
-					changeFgBg(DEFAULT_TEXT_COLOR, DEFAULT_BACKGROUND_COLOR);
-					ispisiProsli(trenutniIzbor);
-					changeFgBg(SELECT_TEXT_COLOR, DEFAULT_BACKGROUND_COLOR);
-					kanta(KANTA_X, KANTA_Y);
-					trenutniIzbor = 7;
-					continue;
-				}
-				*/
-
 			novaKolona = trenutnaKolona;
 			novaVrsta = trenutnaVrsta;
 
@@ -1672,9 +1657,6 @@ void update(POLJE mat[][DIM], COORD niz[], int n)
 
 void animeGif()
 {
-	char frame[100] = "GIF\\frame";
-	char frameNum[10];
-	wchar_t* niz;
 	changeConsole(600, 300, 2, 0);
 	FlushConsoleInputBuffer(GetStdHandle(STD_OUTPUT_HANDLE));
 	system("cls");
@@ -1686,29 +1668,28 @@ void animeGif()
 		{
 			SakrijKursor();
 
-			itoa(i, frameNum, 10);
-			strcat(frame, frameNum);
-			strcat(frame, ".txt");
-
-			niz = ucitajFajl(frame);
-
 			_setmode(_fileno(stdout), _O_TEXT);
 			gotoxy(0, 0);
-			wprintf(L"%s", niz);
+			wprintf(L"%s", frejmovi[i]);
+
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
+			printf("%c[2K", 27);
 			if (_kbhit())
 			{
 				changeFgBg(DEFAULT_TEXT_COLOR, DEFAULT_BACKGROUND_COLOR);
 				break;
 			}
-			/*for (int j = 0; j < 5; j++)
-				for (int i = 0; i < 600; i++)
-				{
-					gotoxy(i, j);
-					wprintf(L" ");
-				}*/
-			free(niz);
-
-			strcpy(frame, "GIF\\frame");
+			
 			Sleep(delay);
 		}
 		PlaySound(NULL, NULL, SND_NODEFAULT | SND_ASYNC);
@@ -2807,7 +2788,7 @@ void exitAnim()
 	}
 }
 
-void settings()
+void settingsMeni()
 {
 	changeConsole(300, 50, 4, 0);
 	system("cls");
@@ -2839,6 +2820,7 @@ void settings()
 				ispisiString("           ", 200, 20);
 				ispisiString(string, 200, 20);
 			}
+
 			if (c == 13)
 				break;
 		}
