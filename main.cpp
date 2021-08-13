@@ -1,4 +1,4 @@
-#include "BRODIC.h"
+#include "Brodic/BRODIC.h"
 #pragma warning(disable:4996)
 
 int main()
